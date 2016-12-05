@@ -1,6 +1,5 @@
 __author__ = 'dorota'
 
-
 class Group:
 
     def __init__(self, name, header, footer):

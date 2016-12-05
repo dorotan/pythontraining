@@ -1,6 +1,5 @@
 __author__ = 'dorota'
 
-
 class Contact:
 
     def __init__(self, firstname, middlename, lastname, nickname, mobile, email, address2, phone2, notes):
