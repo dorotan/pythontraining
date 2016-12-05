@@ -1,6 +1,5 @@
 __author__ = 'dorota'
 
-
 class GroupHelper:
 
     def __init__(self, app):

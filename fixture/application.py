@@ -4,7 +4,6 @@ from fixture.group import GroupHelper
 from fixture.contact import ContactHelper
 __author__ = 'dorota'
 
-
 class Application:
 
     def __init__(self):

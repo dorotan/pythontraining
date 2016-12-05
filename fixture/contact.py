@@ -1,6 +1,5 @@
 __author__ = 'dorota'
 
-
 class ContactHelper:
 
     def __init__(self, app):
