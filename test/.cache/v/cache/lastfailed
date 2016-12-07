@@ -1,3 +1,4 @@
 {
-  "test_del_contact.py::test_delete_first_contact": true
+  "test_add_contact.py::test_add_contact": true,
+  "test_add_contact.py::test_add_empty_contact": true
 }
