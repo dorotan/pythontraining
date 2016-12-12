@@ -11,6 +11,7 @@ class ContactHelper:
 
     def create(self, contact):
         wd = self.app.wd
+        wd.implicitly_wait(20)
         self.open_new_contact_page()
         # fill new contact form
         self.fill_contact_form(contact)
@@ -20,6 +21,7 @@ class ContactHelper:
 
     def delete_first_contact(self):
         wd = self.app.wd
+        wd.implicitly_wait(20)
         # select first contact
         wd.find_element_by_name("selected[]").click()
         # submit deletion
@@ -28,7 +30,8 @@ class ContactHelper:
 
     def modify_first_contact(self, new_contact_data):
         wd = self.app.wd
-        self.open_new_contact_page()
+        wd.implicitly_wait(20)
+        wd.get("http://localhost:81/addressbook/")
         wd.find_element_by_name("selected[]").click()
         # open modification form
         wd.find_element_by_xpath("//div/div[4]/form[2]/table/tbody/tr[11]/td[8]/a/img").click()
@@ -56,7 +59,7 @@ class ContactHelper:
         self.change_field_value_contact("phone2", contact.phone2)
         self.change_field_value_contact("notes", contact.notes)
         # submit adding changes
-        wd.find_element_by_name("update").click()
+        # wd.find_element_by_name("submit").click()
 
     def count(self):
         wd = self.app.wd
