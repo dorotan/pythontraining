@@ -1,5 +1,7 @@
 __author__ = 'dorota'
 
+from model.contact import Contact
+
 class ContactHelper:
 
     def __init__(self, app):
@@ -11,7 +13,6 @@ class ContactHelper:
 
     def create(self, contact):
         wd = self.app.wd
-        wd.implicitly_wait(20)
         self.open_new_contact_page()
         # fill new contact form
         self.fill_contact_form(contact)
@@ -21,7 +22,6 @@ class ContactHelper:
 
     def delete_first_contact(self):
         wd = self.app.wd
-        wd.implicitly_wait(20)
         # select first contact
         wd.find_element_by_name("selected[]").click()
         # submit deletion
@@ -30,7 +30,6 @@ class ContactHelper:
 
     def modify_first_contact(self, new_contact_data):
         wd = self.app.wd
-        wd.implicitly_wait(20)
         wd.get("http://localhost:81/addressbook/")
         wd.find_element_by_name("selected[]").click()
         # open modification form
@@ -58,8 +57,6 @@ class ContactHelper:
         self.change_field_value_contact("address2", contact.address2)
         self.change_field_value_contact("phone2", contact.phone2)
         self.change_field_value_contact("notes", contact.notes)
-        # submit adding changes
-        # wd.find_element_by_name("submit").click()
 
     def count(self):
         wd = self.app.wd
@@ -70,3 +67,13 @@ class ContactHelper:
         wd = self.app.wd
         self.open_new_contact_page()
         return len(wd.find_elements_by_name("update"))
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.open_new_contact_page()
+        contacts = []
+        for element in wd.find_elements_by_css_selector("td.center"):
+            text = element.text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            contacts.append(Contact(name=text, id=id))
+        return contacts

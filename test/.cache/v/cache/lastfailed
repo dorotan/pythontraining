@@ -1,3 +1,4 @@
 {
-  "test_modify_contact.py::test_modify_contact_middlename": true
+  "test_add_group.py::test_add_empty_group": true,
+  "test_add_group.py::test_add_group": true
 }
