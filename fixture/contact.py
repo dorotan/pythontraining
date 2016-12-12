@@ -21,7 +21,18 @@ class ContactHelper:
         wd.find_element_by_xpath("//div/div[3]/ul/li[1]/a").click()
         self.contact_cache = None
 
+    def select_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
     def delete_first_contact(self):
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         # select first contact
         wd.find_element_by_name("selected[]").click()
@@ -30,9 +41,13 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
-    def modify_first_contact(self, new_contact_data):
+    def modify_first_contact(self):
+        self.delete_contact_by_index(0)
+
+    def modify_contact_by_index(self, index, new_contact_data):
         wd = self.app.wd
         wd.get("http://localhost:81/addressbook/")
+        self.select_contact_by_index(index)
         wd.find_element_by_name("selected[]").click()
         # open modification form
         wd.find_element_by_xpath("//div/div[4]/form[2]/table/tbody/tr[11]/td[8]/a/img").click()
