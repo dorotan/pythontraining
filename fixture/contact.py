@@ -65,9 +65,6 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
-    def modify_first_contact(self):
-        self.modify_contact_by_index[0]
-
     def modify_contact_by_index(self, index, new_contact_data):
         wd = self.app.wd
         self.open_contacts_page()
@@ -79,6 +76,9 @@ class ContactHelper:
         # submit modification
         wd.find_element_by_name("update").click()
         self.contact_cache = None
+
+    def modify_first_contact(self):
+        self.modify_contact_by_index[0]
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
