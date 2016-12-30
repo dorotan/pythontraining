@@ -21,8 +21,8 @@ class Application:
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
-        self.open_homepage()
         self.base_url = base_url
+        self.open_homepage()
 
     def is_valid(self):
         try:
