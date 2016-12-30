@@ -32,7 +32,7 @@ class Application:
             return False
 
     def open_homepage(self):
-        def open_home_page(self):
+            self.open_home_page()
             wd = self.wd
             wd.get(self.base_url)
 
