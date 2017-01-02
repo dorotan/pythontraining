@@ -1,8 +1,4 @@
 {
-  "test_add_contact.py::test_add_contact": true,
-  "test_add_group.py::test_add_group": true,
-  "test_del_contact.py::test_delete_some_contact": true,
-  "test_del_group.py::test_delete_some_group": true,
-  "test_modify_contact.py::test_modify_some_contact": true,
-  "test_modify_group.py::test_modify_group_name": true
+  "test_add_group.py::test_add_group[None:name1;header1;footer1]": true,
+  "test_add_group.py::test_add_group[None:name2;header2;footer2]": true
 }
