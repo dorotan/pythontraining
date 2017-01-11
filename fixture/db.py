@@ -1,5 +1,5 @@
 __author__ = 'dorota'
-import mysql.connector
+import mysql.connectorb
 from model.group import Group
 from model.contact import Contact
 
@@ -33,11 +33,11 @@ class DbFixture:
         list = []
         cursor = self.connection.cursor()
         try:
-            cursor.execute("select id, nickname, company, title, address, fax, notes from addressbook")
+            cursor.execute("select id, firstname, lastname, nickname, company, title, address, fax, notes from addressbook where deprecated='0000-00-00 00:00:00'")
             for row in cursor:
-                (id, nickname, company, title, address, fax, notes) = row
-                list.append(Contact(id=id, nickname=nickname, company=company, title=title, address=address, fax=fax,
-                                    notes=notes, ))
+                (id, nickname, firstname, lastname, company, title, address, fax, notes) = row
+                list.append(Contact(id=id, nickname=nickname, firstname=firstname, lastname=lastname, company=company,
+                                    title=title, address=address, fax=fax, notes=notes))
         finally:
             cursor.close()
         return list
