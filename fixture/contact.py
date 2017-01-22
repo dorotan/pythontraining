@@ -25,11 +25,11 @@ class ContactHelper:
             self.contact_cache = []
             for row in wd.find_elements_by_name("entry"):
                 cells = row.find_elements_by_tag_name("td")
-                firstname = cells[1].text
-                lastname = cells[2].text
-                id = cells[0].find_element_by_name("input").get_attribute("value")
+                lastname = cells[1].text
+                firstname = cells[2].text
+                id = cells[0].find_element_by_tag_name("input").get_attribute("value")
                 all_phones = cells[5].text
-                self.contact_cache.append(Contact(first_name=firstname[2], last_name=lastname, id=id,
+                self.contact_cache.append(Contact(first_name=firstname[3], last_name=lastname, id=id,
                                                   all_phones_from_homepage = all_phones))
         return list(self.contact_cache)
 
