@@ -35,9 +35,7 @@ class DbFixture:
             cursor.execute("select id, firstname, lastname from addressbook where deprecated='0000-00-00 00:00:00'")
             for row in cursor:
                 (id, firstname, lastname) = row
-                list.append(Contact(first_name=firstname, last_name=lastname, id=str(id), home_number=home,
-                             mobile_number=mobile, work_number=work, second_private_number = phone2,
-                             first_email=email, second_email=email2, address=address, third_email=email3))
+                list.append(Contact(first_name=firstname, last_name=lastname, id=str(id)))
         finally:
             cursor.close()
         return list

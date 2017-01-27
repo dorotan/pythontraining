@@ -30,7 +30,7 @@ class ContactHelper:
                 id = cells[0].find_element_by_tag_name("input").get_attribute("value")
                 all_phones = cells[5].text
                 self.contact_cache.append(Contact(first_name=firstname[3], last_name=lastname, id=id,
-                                                  all_phones_from_homepage = all_phones))
+                                                  all_phones_from_homepage = all_phones, all_emails_from_home_page=all_emails))
         return list(self.contact_cache)
 
     def open_contact_to_edit_by_index(self, index):
@@ -126,6 +126,9 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_css_selector("input[value='%s']" % id).click()
 
+    def modify_contact_by_id(self):
+
+
 
     def delete_first_contact(self):
         self.delete_contact_by_index(0)
@@ -151,13 +154,35 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
+    def add_contact_to_group_by_id(self, id, group):
+        wd = self.app.wd
+        if not len(wd.find_elements_by_name("searchstring")) > 0:
+            self.app.open_home_page()
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
+        number = group.id
+        wd.find_element_by_xpath("//select[@name='to_group']//option[@value='%s']" % number).click()
+        wd.find_element_by_name("add").click()
+        self.app.open_home_page()
+        self.contact_cache = None
+
+    def add_contact_to_group(self, Contact, group):
+        wd = self.app.wd
+        if not len(wd.find_elements_by_name("searchstring")) > 0:
+            self.app.open_home_page()
+        wd.find_element_by_link_text("add new").click()
+        self.fill_contact_form(Contact)
+        number = group.id
+        wd.find_element_by_xpath("//div[@id='content']/form/select[5]//option[@value='%s']" % number).click()
+        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        self.app.open_home_page()
+        self.contact_cache = None
 
     def modify_contact_by_index(self, index, new_contact_data):
         wd = self.app.wd
         self.open_contacts_page()
-        contactrow = wd.find_elements_by_name("entry")[index]
-        contactcell = contactrow.find_elements_by_tag_name("td")
-        contactcell[7].click()
+        contact_row = wd.find_elements_by_name("entry")[index]
+        contact_cell = contact_row.find_elements_by_tag_name("td")
+        contact_cell[7].click()
         # fill contact form
         self.fill_contact_form(new_contact_data)
         # submit modification
@@ -165,7 +190,8 @@ class ContactHelper:
         self.contact_cache = None
 
     def modify_first_contact(self):
-        self.modify_contact_by_index[0]
+        wd = self.app.wd
+        self.modify_contact_by_index(0)
 
     def open_contacts_page(self):
         wd = self.app.wd
@@ -176,3 +202,8 @@ class ContactHelper:
         wd = self.app.wd
         self.open_contacts_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def check_if_list_contains_removed_contacts(self, old_contacts, removed_contacts):
+        if sorted(removed_contacts, key=Contact.id_or_max) in sorted(old_contacts, key=Contact.id_or_max):
+            old_contacts.remove(removed_contacts)
+        return old_contacts
