@@ -1,5 +1,5 @@
-__author__ = 'dorota'
 # -*- coding: utf-8 -*-
+__author__ = 'dorota'
 from sys import maxsize
 
 

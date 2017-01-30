@@ -1,8 +1,10 @@
-__author__ = 'dorota'
 # -*- coding: utf-8 -*-
+__author__ = 'dorota'
 from sys import maxsize
 
+
 class Group:
+
 
     def __init__(self, name=None, header=None, footer=None, id=None):
         self.name = name
