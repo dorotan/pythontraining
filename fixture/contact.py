@@ -126,9 +126,17 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_css_selector("input[value='%s']" % id).click()
 
-    def modify_contact_by_id(self):
-
-
+    def modify_contact_by_id(self, id, new_contact_data):
+        wd = self.app.wd
+        self.open_contacts_page()
+        self.select_contact_by_id(id)
+        # open modification form
+        wd.find_element_by_css_selector("a[href='edit.php?id=%s']" % str(id)).click()
+        # fill contact form
+        self.fill_contact_form(new_contact_data)
+        # submit modification
+        wd.find_element_by_name("update").click()
+        self.contact_cache = None
 
     def delete_first_contact(self):
         self.delete_contact_by_index(0)
