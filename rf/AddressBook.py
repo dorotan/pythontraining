@@ -59,4 +59,4 @@ class AddressBook:
         self.fixture.contact.modify_contact_by_id(contact.id, new_contact)
 
     def create_contact(self, contact):
-        self.fixture.contact.add_new_contact(contact)
+        self.fixture.contact.create(contact)
